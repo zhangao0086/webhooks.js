@@ -1,4 +1,4 @@
-import { Webhooks, EmitterWebhookEvent } from "../../src";
+import { Webhooks, EmitterWebhookEvent } from "../../src/index.js";
 
 describe("Webhooks", () => {
   test("new Webhooks() without secret option", () => {

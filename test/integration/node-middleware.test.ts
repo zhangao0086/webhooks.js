@@ -6,8 +6,8 @@ import { sign } from "@octokit/webhooks-methods";
 // import without types
 const express = require("express");
 
-import { Webhooks, createNodeMiddleware } from "../../src";
-import { pushEventPayload } from "../fixtures";
+import { Webhooks, createNodeMiddleware } from "../../src/index.js";
+import { pushEventPayload } from "../fixtures/index.js";
 
 let signatureSha256: string;
 
