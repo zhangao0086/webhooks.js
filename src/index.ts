@@ -1,7 +1,7 @@
-import { sign, verify } from "@octokit/webhooks-methods";
-
 import { createLogger } from "./createLogger.js";
 import { createEventHandler } from "./event-handler/index.js";
+import { sign } from "./sign.js";
+import { verify } from "./verify.js";
 import { verifyAndReceive } from "./verify-and-receive.js";
 import {
   EmitterWebhookEvent,
@@ -11,6 +11,8 @@ import {
   State,
   WebhookError,
   WebhookEventHandlerError,
+  EmitterWebhookEventWithStringPayloadAndSignature,
+  EmitterWebhookEventWithSignature,
 } from "./types";
 
 export { createNodeMiddleware } from "./middleware/node/index.js";
@@ -34,7 +36,9 @@ class Webhooks<TTransformed = unknown> {
   ) => void;
   public receive: (event: EmitterWebhookEvent) => Promise<void>;
   public verifyAndReceive: (
-    options: EmitterWebhookEvent & { signature: string }
+    options:
+      | EmitterWebhookEventWithStringPayloadAndSignature
+      | EmitterWebhookEventWithSignature
   ) => Promise<void>;
 
   constructor(options: Options<TTransformed> & { secret: string }) {
